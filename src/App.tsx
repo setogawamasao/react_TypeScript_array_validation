@@ -20,7 +20,7 @@ function App() {
 
   const onSubmit = (data: {}): void => alert(JSON.stringify(data, null, 2));
 
-  //console.log("errors ", errors);
+  console.log("errors ", errors);
   return (
     <>
       <h2>Array values & alone value </h2>
@@ -44,7 +44,9 @@ function App() {
               disabled={flag}
             />
             <input type="button" value="delete" onClick={() => remove(index)} />
-            <span>{errors.rows?.[index] && "required!!"}</span>
+            <span>
+              {errors.rows?.[index] && errors.rows?.[index].row?.message}
+            </span>
           </div>
         );
       })}
