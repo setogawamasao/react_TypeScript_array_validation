@@ -41,16 +41,15 @@ export const ListTextBox = forwardRef(
 
     return (
       <>
-        <label>Array values</label>
-        <div>
-          <input
-            type="button"
-            onClick={(): void => {
-              append({ row: "" });
-            }}
-            value="add"
-          />
-        </div>
+        <h4>list Input box</h4>
+        <input
+          type="button"
+          style={{ display: "block" }}
+          onClick={(): void => {
+            append({ row: "" });
+          }}
+          value="add row"
+        />
         {fields.map((item, index) => {
           return (
             <div key={item.id}>

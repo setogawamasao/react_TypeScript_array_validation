@@ -6,7 +6,7 @@ export const TextBox: React.FC<{ isDeseable: boolean }> = (props) => {
 
   return (
     <>
-      <label>alone value</label>
+      <h4>Alone Input Box</h4>
       <div>
         <input
           type="text"
