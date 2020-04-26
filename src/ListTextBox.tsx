@@ -37,7 +37,7 @@ export const ListTextBox = forwardRef(
 
     useEffect(() => {
       append({ row: "use effect add" });
-    }, []);
+    }, [append]);
 
     return (
       <>

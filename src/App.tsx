@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useRef, useImperativeHandle, forwardRef } from "react";
+import { useRef } from "react";
 import { useForm, FormContext } from "react-hook-form";
 import { ListTextBox } from "./ListTextBox";
 import { TextBox } from "./TextBox";
+import { FileInput } from "./FileInput";
 
 interface Handler {
   remveEmptyRow(): void;
@@ -19,7 +20,10 @@ function App() {
     ref.current.remveEmptyRow();
   };
 
-  const onSubmit = (data: {}): void => alert(JSON.stringify(data, null, 2));
+  const onSubmit = (data: {}): void => {
+    console.log(data);
+    alert(JSON.stringify(data, null, 2));
+  };
 
   console.log("errors ", methods.errors);
   return (
@@ -30,10 +34,12 @@ function App() {
       <FormContext {...methods}>
         <ListTextBox ref={ref} isDeseable={isDiseable} />
         <TextBox isDeseable={isDiseable} />
+        <FileInput isDeseable={isDiseable} />
       </FormContext>
 
-      {/* button area */}
       <div style={{ margin: "30px" }} />
+
+      {/* button area */}
       <input
         type="button"
         value="change Confirm"
