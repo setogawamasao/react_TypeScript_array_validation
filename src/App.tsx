@@ -8,9 +8,10 @@ import { FileInput } from "./FileInput";
 
 interface Handler {
   remveEmptyRow(): void;
+  getRowValues(): void;
 }
 
-function App() {
+export const App = () => {
   const methods = useForm({ mode: "onChange" });
   const [isDiseable, setisDiseable] = useState(false);
   const ref = useRef({} as Handler);
@@ -21,14 +22,14 @@ function App() {
   };
 
   const onSubmit = (data: {}): void => {
-    console.log(data);
+    console.log(ref.current.getRowValues());
     alert(JSON.stringify(data, null, 2));
   };
 
   console.log("errors ", methods.errors);
   return (
     <>
-      <h2>Separaged input areta </h2>
+      <h2>Separated Input</h2>
 
       {/* input area */}
       <FormContext {...methods}>
@@ -56,6 +57,4 @@ function App() {
       />
     </>
   );
-}
-
-export default App;
+};

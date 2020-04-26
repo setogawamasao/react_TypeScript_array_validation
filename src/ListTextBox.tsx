@@ -31,8 +31,14 @@ export const ListTextBox = forwardRef(
       remove(numbers);
     };
 
+    const getRowValues = (): string[] => {
+      return methods.getValues({ nest: true }).rows.map((item: Row) => {
+        return item.row;
+      });
+    };
+
     useImperativeHandle(ref, () => {
-      return { remveEmptyRow };
+      return { remveEmptyRow, getRowValues };
     });
 
     useEffect(() => {

@@ -59,12 +59,14 @@ export const FileInput: React.FC<{ isDeseable: boolean }> = (props) => {
     return (
       <div key={id} className="preview">
         <img src={imageUrl} alt="preview" style={{ width: "100%" }} />
-        <img
-          src={Icon}
-          className="delete-button"
-          onClick={() => deleteImage(id)}
-          alt="deleteButton"
-        />
+        {!props.isDeseable && (
+          <img
+            src={Icon}
+            className="delete-button"
+            onClick={() => deleteImage(id)}
+            alt="deleteButton"
+          />
+        )}
       </div>
     );
   };
@@ -79,8 +81,11 @@ export const FileInput: React.FC<{ isDeseable: boolean }> = (props) => {
         onChange={onChange}
         key={resetKey}
         ref={methods.register}
-      ></input>
-      <input type="button" value="reset" onClick={reset}></input>
+        style={props.isDeseable ? { display: "none" } : { display: "block" }}
+      />
+      {!props.isDeseable && (
+        <input type="button" value="reset" onClick={reset}></input>
+      )}
       <div>
         {imageUrls.map((imageUrl, id) => {
           return preview(imageUrl, id);
