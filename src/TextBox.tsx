@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-export const TextBox: React.FC<{ isDeseable: boolean }> = (props) => {
+export const TextBox: React.FC<{ isDisabled: boolean }> = (props) => {
   const methods = useFormContext();
 
   return (
@@ -12,7 +12,7 @@ export const TextBox: React.FC<{ isDeseable: boolean }> = (props) => {
           type="text"
           name="alone"
           ref={methods.register({ required: "reqired!!" })}
-          disabled={props.isDeseable}
+          disabled={props.isDisabled}
         />
         {methods.errors.alone && methods.errors.alone.message}
       </div>

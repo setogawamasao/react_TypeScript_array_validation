@@ -3,13 +3,18 @@ import { useEffect } from "react";
 import { useImperativeHandle, forwardRef } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
+export interface ListTextBoxFunctions {
+  remveEmptyRow(): void;
+  getRowValues(): void;
+  addRow(): void;
+}
 interface Row {
   row: string;
 }
 
-//export const List: React.FC<{ isDeseable: boolean }> = (props) => {
+//export const List: React.FC<{ isDisabled: boolean }> = (props) => {
 export const ListTextBox = forwardRef(
-  ({ isDeseable }: { isDeseable: boolean }, ref) => {
+  ({ isDisabled }: { isDisabled: boolean }, ref) => {
     const methods = useFormContext();
     const { control } = useFormContext();
     const { fields, append, remove } = useFieldArray({
@@ -37,12 +42,18 @@ export const ListTextBox = forwardRef(
       });
     };
 
+    const addRow = (): void => {
+      if (methods.getValues({ nest: true }).rows === undefined) {
+        append({ row: "" });
+      }
+    };
+
     useImperativeHandle(ref, () => {
-      return { remveEmptyRow, getRowValues };
+      return { remveEmptyRow, getRowValues, addRow };
     });
 
     useEffect(() => {
-      append({ row: "use effect add" });
+      append({ row: "" });
     }, [append]);
 
     return (
@@ -63,7 +74,7 @@ export const ListTextBox = forwardRef(
                 name={`rows[${index}].row`}
                 defaultValue={`${item.row}`}
                 ref={methods.register({ required: "list Required!!" })}
-                disabled={isDeseable}
+                disabled={isDisabled}
               />
               <input
                 type="button"
